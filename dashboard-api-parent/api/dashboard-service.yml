@@ -1,0 +1,308 @@
+openapi: 3.0.0
+
+info:
+  version: 0.0.1
+  title: Dashboard Service
+  description: The Dashboard service
+
+tags:
+  - name: "Dashboard"
+
+paths:
+  /get/dashboard/impactControl:
+    get:
+      parameters:
+      - name: lanID
+        in: header
+        description: Type of land Id fetch
+        required: true
+        schema:
+          type: string
+          format: ""
+      - name: password
+        in: header
+        description: Password
+        required: true
+        schema:
+          type: string
+          format: ""    
+      summary: Get all impactControl.
+      tags:
+        - "ImpactControl"
+
+      description: This is a impactControl service description
+      operationId: getAllImpactControl
+      responses:
+        "200":
+          description: This means its ok.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImpactControl'
+  /get/containment:
+    post:
+      parameters:
+      - name: businessUnit
+        in: header
+        description: Type of business Unit need to fetch
+        required: true
+        schema:
+          type: string
+          format: ""
+      - name: fromDate
+        in: header
+        description: Start Date time
+        required: true
+        schema:
+          type: string
+          format: ""          
+      - name: toDate
+        in: header
+        description: End Date time
+        required: true
+        schema:
+          type: string
+          format: ""  
+      summary: Get containment.
+      tags:
+        - "Containment"
+
+      description: This is a containment metrics description
+      operationId: getContainmentMetrics
+      responses:
+        "200":
+          description: This means its ok.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Containment'
+  /get/callerIntent:
+    post:
+      parameters:
+      - name: businessUnit
+        in: header
+        description: Type of business Unit need to fetch
+        required: true
+        schema:
+          type: string
+          format: ""
+      - name: fromDate
+        in: header
+        description: Start Date time
+        required: true
+        schema:
+          type: string
+          format: ""          
+      - name: toDate
+        in: header
+        description: End Date time
+        required: true
+        schema:
+          type: string
+          format: ""  
+      summary: Get callerIntent.
+      tags:
+        - "CallerIntent"
+
+      description: This is a callerIntent metrics description
+      operationId: getCallerIntentMetrics
+      responses:
+        "200":
+          description: This means its ok.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CallerIntent'
+  /get/autheticationType:
+    post:
+      parameters:
+      - name: businessUnit
+        in: header
+        description: Type of business Unit need to fetch
+        required: true
+        schema:
+          type: string
+          format: ""
+      - name: fromDate
+        in: header
+        description: Start Date time
+        required: true
+        schema:
+          type: string
+          format: ""          
+      - name: toDate
+        in: header
+        description: End Date time
+        required: true
+        schema:
+          type: string
+          format: ""  
+      summary: Get autheticationType.
+      tags:
+        - "AutheticationType"
+
+      description: This is a autheticationType metrics description
+      operationId: getAutheticationTypeMetrics
+      responses:
+        "200":
+          description: This means its ok.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AutheticationType'
+  /get/botLevel:
+    post:
+      parameters:
+      - name: businessUnit
+        in: header
+        description: Type of business Unit need to fetch
+        required: true
+        schema:
+          type: string
+          format: ""
+      - name: fromDate
+        in: header
+        description: Start Date time
+        required: true
+        schema:
+          type: string
+          format: ""          
+      - name: toDate
+        in: header
+        description: End Date time
+        required: true
+        schema:
+          type: string
+          format: ""  
+      summary: Get botLevel.
+      tags:
+        - "BotLevel"
+
+      description: This is a botLevel metrics description
+      operationId: getBotLevelMetrics
+      responses:
+        "200":
+          description: This means its ok.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BotLevel'              
+components:
+  schemas:
+    ImpactControl:
+      description: This is the ImpactControl model.
+      type: object
+      properties:
+        businessUnit:
+          description: Business Unit name.
+          type: string
+        dnis:
+          description: DNIS.
+          type: integer
+    Containment:
+      description: This is the Containment model.
+      type: object
+      properties:
+        total:
+          description: The ID of Containment.
+          type: integer
+        contained:
+          description: The dnis.
+          type: integer
+        notContained:
+          description: The dnis.
+          type: integer
+    CallerIntent:
+      description: This is the CallerIntent model.
+      type: object
+      properties:
+        callTransfer:
+          description: The callTransfer.
+          type: integer
+        GhostCALL:
+          description: The GhostCALL.
+          type: integer
+        CFT Call:
+          description: The CFT Call.
+          type: integer
+        Authenticated Call:
+          description: The Authenticated Call.
+          type: integer
+    AutheticationType:
+      description: This is the AutheticationType model.
+      type: object
+      properties:
+        FullyAuth:
+          description: The fullyAuth.
+          type: integer
+        PartialAuth:
+          description: The partialAuth.
+          type: integer
+        NoAuth:
+          description: The noAuth.
+          type: integer
+        Authenticated Call:
+          description: The Authenticated Call.
+          type: integer 
+    BotLevel:
+      description: This is the BotLevel model.
+      type: object
+      properties:
+        Refill:
+          description: The Refill.
+          type: integer
+        OrderStatus:
+          description: The OrderStatus.
+          type: integer
+        Balance & Payment:
+          description: The Balance & Payment.
+          type: integer
+        Retail Call:
+          description: The Retail Call.
+          type: integer      
+  requestBodies:
+    ImpactControlBody:
+      description: A JSON object containing ImpactControl information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ImpactControl'
+    ContainmentBody:
+      description: A JSON object containing Containment information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Containment'
+    CallerIntentBody:
+      description: A JSON object containing CallerIntent information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CallerIntent'
+    AutheticationTypeBody:
+      description: A JSON object containing AutheticationType information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AutheticationType' 
+    BotLevelBody:
+      description: A JSON object containing BotLevel information
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BotLevel'        
