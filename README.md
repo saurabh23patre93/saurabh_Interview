@@ -18,8 +18,6 @@ Request:
     "toDate": "010/09/2023"
 }
 
-
-
 Response:
 [
     {
